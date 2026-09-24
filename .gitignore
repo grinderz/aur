@@ -1,5 +1,5 @@
-# makepkg work dirs and build products, per package
-*/src/
-*/pkg/
+# a package directory holds only PKGBUILD and .SRCINFO; makepkg's src/,
+# pkg/, the upstream clone and the built package are all work products
+*/*/
 */*.pkg.tar.*
 */*.log

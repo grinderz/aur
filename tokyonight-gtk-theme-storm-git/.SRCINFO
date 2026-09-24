@@ -1,6 +1,6 @@
 pkgbase = tokyonight-gtk-theme-storm-git
 	pkgdesc = Tokyo Night GTK theme, Storm variant (dark, default accent) with the Tokyonight-Dark icons
-	pkgver = r70.6c340e05
+	pkgver = r96.6c340e05
 	pkgrel = 1
 	url = https://github.com/Fausto-Korpsvart/Tokyo-Night-GTK-Theme
 	arch = any
