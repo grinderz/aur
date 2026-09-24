@@ -1,0 +1,41 @@
+# Maintainer: Anton Danilov
+#
+# The AUR's tokyonight-gtk-theme-git builds the installer's defaults, which
+# is the Night palette. This one builds the Storm variant only — dark,
+# default accent, standard size — plus the matching icon set.
+
+pkgname=tokyonight-gtk-theme-storm-git
+_reponame=Tokyo-Night-GTK-Theme
+pkgver=r70.6c340e05
+pkgrel=1
+pkgdesc="Tokyo Night GTK theme, Storm variant (dark, default accent) with the Tokyonight-Dark icons"
+arch=('any')
+url="https://github.com/Fausto-Korpsvart/${_reponame}"
+license=('GPL-3.0-only')
+depends=('gnome-themes-extra')
+makedepends=('git' 'sassc')
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+source=("git+${url}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "${_reponame}"
+    printf 'r%s.%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+package() {
+    cd "${_reponame}"
+
+    install -D -m0644 -t "${pkgdir}/usr/share/doc/${pkgname}" README.md
+    install -D -m0644 -t "${pkgdir}/usr/share/licenses/${pkgname}" LICENSE
+
+    # the installer compiles the sass for the variant it is asked for and
+    # writes Tokyonight-Dark-Storm under --dest
+    local dest="${pkgdir}/usr/share/themes"
+    mkdir -p "${dest}"
+    (cd themes && ./install.sh --dest "${dest}" --color dark --theme default --tweaks storm)
+
+    mkdir -p "${pkgdir}/usr/share/icons"
+    cp -r icons/Tokyonight-Dark "${pkgdir}/usr/share/icons/"
+}

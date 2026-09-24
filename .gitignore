@@ -1,0 +1,5 @@
+# makepkg work dirs and build products, per package
+*/src/
+*/pkg/
+*/*.pkg.tar.*
+*/*.log
